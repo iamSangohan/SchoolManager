@@ -1,0 +1,153 @@
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Urbanist', sans-serif;
+}
+
+html{
+    height: 100%;
+}
+
+body{
+    height: inherit;
+    font-family: 'Urbanist', sans-serif;
+    overflow-x: hidden;
+    height: 100%;
+}
+
+.header{
+    background-image: url("../img/bg.webp");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+header{
+    height: auto;
+    justify-content: center;
+    padding: 40px 0;
+    /* color: white; */
+}
+
+a{
+    text-decoration: none;
+    color: black;
+    /* color: white; */
+}
+
+ul{
+    margin-bottom: 0;
+    padding-left: 0;
+}
+
+main{
+    /* height: 85%; */
+    padding: 3rem;
+    max-width: 1200px;
+    /* width: 80%; */
+    margin: auto;
+}
+
+section{
+    margin-bottom: 40px;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+@media  screen and (max-width: 680px) {
+    header{
+        justify-content: space-around !important;
+    }
+}
+
+nav{
+    font-size: 1.1em;
+    font-weight: bold;
+    text-align: center;
+}
+
+nav ul li{
+    list-style: none;
+}
+
+header a{
+    color: black !important;
+    font-size: 18px !important;
+    font-weight: bold !important;
+}
+
+@media only screen and (max-width : 750px) {
+    body{
+        font-size: 15px;
+    }
+
+    header{
+        justify-content: space-between;
+        padding: 0 10%;
+        border-bottom: 2px solid #dee2e6;
+    }
+    
+    .menuBurger{
+        display: flex;
+    }
+
+    main{
+        width: 100%;
+        padding: 1rem;
+    }
+
+    #navbar{
+        display: block;
+        position: fixed;
+        width: 100%;
+        height: inherit;
+        background-color: white;
+        color: #4155ff;
+        text-align: center;
+        left: -100%;
+        padding: 0 1%;
+        z-index: 100;
+        transition: all .3s ease-in-out;
+    }
+
+    #navbar ul{
+        display: flex;
+        flex-direction: column !important;
+        align-items: center !important;
+        height: 100%;
+        width: 100%;
+    }
+
+    #navbar ul li{
+        /* width: 50%; */
+        margin: 7% auto !important;
+    }
+}
+
+.action_rapide.menus{
+    width: 60%;
+    margin: auto;
+}
+
+.menu{
+    padding: 10px;
+    height: 70px;
+    width: 50%;
+    margin: 40px 10px !important;
+    border-radius: 10px;    
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.menus .menu div{
+    cursor: pointer;
+}
