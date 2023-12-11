@@ -61,10 +61,10 @@
                                                 <label class="custom-control-label" for="customCheck">Se souvenir</label>
                                             </div>
                                         </div>
-                                        <!-- <input type="submit" class="btn btn-primary btn-user btn-block" value="Connexion"/> -->
-                                        <a href="ed-index.html" class="btn btn-primary btn-user btn-block">
+                                        <input type="submit" class="btn btn-primary btn-user btn-block" value="Connexion"/>
+                                        <!-- <a href="ed-index.html" class="btn btn-primary btn-user btn-block">
                                             Connexion
-                                        </a>
+                                        </a> -->
                                         <hr>
                                         <a href="index.html" class="btn btn-google btn-user btn-block">
                                             <i class="fab fa-google fa-fw"></i> Connexion avec Google
@@ -126,15 +126,43 @@
                 // Envoi des données avec AJAX
                 $.ajax({
                     method: 'POST',
-                    url: 'http://192.168.1.8:8089/educatrices/login-educatrice',
-                    data: data,
+                    headers: { 
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json' 
+                    },
+                    url: 'http://192.168.1.14:8089/auth/login',
+                    data: JSON.stringify(data),
+                    dataType: 'json',
                     success: function(response) {
-                        console.log(response);
-                        // Changer de page
-                        window.location.href = 'http://127.0.0.1:5500/ed-index.html';
+                        // Récupération des informations du localStorage
+                        window.localStorage.setItem('user', JSON.stringify(response.userInfo));
+                        var user = window.localStorage.getItem('user');
+
+                        // Vérification si les informations existent
+                        if (user) {
+                            // Conversion des informations en objet JSON
+                            user = JSON.parse(user);
+
+                            // Utilisation des informations
+                            console.log(user);
+
+                            // Redirection vers la page d'accueil en fonction du rôle
+                            switch (user.role) {
+                                case "educatrice":
+                                    // Rediriger vers une autre page HTML
+                                    window.location.href = 'ed-index.html';
+                                    break;
+                            
+                                default:
+                                    console.log('Erreur de redirection.');
+                                    break;
+                            }
+                        } else {
+                            console.log('Aucune information utilisateur trouvée dans le localStorage.');
+                        }
                     },
                     error: function(error) {
-                        console.log(error);
+                        return error;
                     }
                 });
             } else {
