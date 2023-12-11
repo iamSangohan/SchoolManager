@@ -145,7 +145,7 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <a class="btn btn-primary" id="logout">Logout</a>
                 </div>
             </div>
         </div>
@@ -173,6 +173,51 @@
 
     <!-- Page level custom scripts -->
     <script src="js/demo/datatables-demo.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            var user = window.localStorage.getItem('user');
+            if (!user) {
+                window.location.href = 'connexion.html';
+            } else {
+                user = JSON.parse(user);
+                var name = user.nom + ' ' + user.prenom;
+                var nom = document.getElementById('nomUtilisateur');
+                if (nom) {
+                    nom.textContent = name;
+                } else {
+                    console.log('Element with ID "nomUtilisateur" not found');
+                }
+                console.log(name);
+            }
+
+            // Recuperer tous les etudiants et les afficher dans le tableau
+            $.ajax({
+                url: 'http://192.168.1.14:8089/etudiants',
+                dataType: 'json',
+                type: 'GET',
+                contentType: 'application/json',
+
+                error: function () {
+                    alert("An error had occurred");
+                },
+                success: function (data) {
+                    console.log("data");
+                    console.log(data);
+                }
+            });
+        });
+
+        var logout = document.getElementById('logout');
+        if (logout) {
+            logout.addEventListener('click', (event) => {
+                window.localStorage.removeItem('user');
+                window.location.href = 'connexion.html';
+            });
+        } else {
+            console.log('Element with ID "logout" not found');
+        }
+    </script>
 
 </body>
 
