@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>School Manager - Accueil</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/form.css">
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Include Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" w3-include-html="sidebar.html"></ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Include Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow" w3-include-html="topbar.html"></nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid" id="main">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Inscription d'un étudiant</h1>
+                    </div>
+
+                    <!-- Content Row -->
+                    <div class="row">
+                        
+                        <!-- MultiStep Form -->
+                        <div class="m-5 col-xl-8 m-auto">
+                            <div class="w-100 m-auto">
+                                <form id="msform">
+                                    <!-- progressbar -->
+                                    <ul id="progressbar">
+                                        <li class="active">Informations personnelles</li>
+                                        <li>Formation</li>
+                                        <li>Compte de l'utilisateur</li>
+                                    </ul>
+                                    <!-- fieldsets -->
+                                    <fieldset>
+                                        <h2 class="fs-title">Informations personnelle</h2>
+                                        <h3 class="fs-subtitle">Lorem ipsum dolor sit amet.</h3>
+                                        <input id="nom" type="text" name="nom" placeholder="Nom de famille" required/>
+                                        <input id="prenom" type="text" name="prenom" placeholder="Prenoms" required/>
+                                        <input id="tel" type="text" name="tel" placeholder="Contact" required/>
+                                        <input id="email" type="email" name="email" placeholder="Email" required/>
+                                        <input type="date" name="dateNaissance" id="">
+                                    
+
+                                        <input type="button" name="next" class="next action-button" value="Suivant"/>
+                                    </fieldset>
+                                    <fieldset>
+                                        <h2 class="fs-title">Formation</h2>
+                                        <h3 class="fs-subtitle">Your presence on the social network</h3>
+                                        <!-- Filiere -->
+                                        <select name="filiere" id="listeFiliere" class="form-control" required>
+                                            <option value="">Choisir une filière</option>
+                                        </select>
+
+                                        <input type="button" name="previous" class="previous action-button-previous" value="Precedant"/>
+                                        <input type="button" name="next" class="next action-button" value="Suivant"/>
+                                    </fieldset>
+                                    <fieldset>
+                                        <h2 class="fs-title">Compte étudiant</h2>
+                                        <h3 class="fs-subtitle">Fill in your credentials</h3>
+                                        <input id="user" type="text" name="user" placeholder="Nom d'utilisateur" required/>
+                                        <input id="password" type="password" name="password" placeholder="Mot de passe" required/>
+
+                                        <input type="button" name="previous" class="previous action-button-previous" value="Precedant"/>
+                                        <input type="submit" name="submit" class="submit action-button" value="Valider"/>
+                                    </fieldset>
+                                </form>
+                                
+                            </div>
+                        </div>
+                        <!-- /.MultiStep Form -->
+                        
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Your Website 2021</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Voulez-vous vraiment quitter ?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
+                    <a class="btn btn-primary" id="logout">Deconnexion</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+    <script>
+        w3.includeHTML();
+    </script>
+    
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="vendor/chart.js/Chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="js/demo/chart-area-demo.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script>
+    <script src="js/form.js"></script>
+
+    <script>
+        var id = 0;
+        
+        document.addEventListener('DOMContentLoaded', (event) => {
+            var user = window.localStorage.getItem('user');
+            if (!user) {
+                window.location.href = 'connexion.html';
+            } else {
+                user = JSON.parse(user);
+                var name = user.nom + ' ' + user.prenom;
+                var nom = document.getElementById('nomUtilisateur');
+                id = user.id_educatrice;
+                if (nom) {
+                    nom.textContent = name;
+                } else {
+                    console.log('Element with ID "nomUtilisateur" not found');
+                }
+            }
+
+            $.ajax({
+                url: 'http://192.168.1.20:8089/filiere',
+                type: 'GET',
+                dataType: 'json',
+                headers : {
+                    'Accept' : 'application/json',
+                    'Content-Type' : 'application/json'
+                },
+                success: function (data) {
+                    listeFilieres = document.getElementById('listeFiliere');
+                    if (listeFilieres){
+                        data.forEach(element => {
+                            listeFilieres.innerHTML += `
+                                <option value="${element.filiere_id}">${element.nom} - ${element.niveau}</option>
+                            `;
+                        });
+                    }
+                },
+                error: function (errorThrown) {
+                    console.log(errorThrown);
+                }
+            });
+
+        });
+
+        var logout = document.getElementById('logout');
+        if (logout) {
+            logout.addEventListener('click', (event) => {
+                window.localStorage.removeItem('user');
+                window.location.href = '../connexion.html';
+            });
+        } else {
+            console.log('Element with ID "logout" not found');
+        }
+
+        
+        // Récupération du formulaire
+        const form = document.querySelector('#msform');
+        // Verifier la soumission du formulaire
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Récuperer les informations du formulaire
+            const nom = document.querySelector('input[name="nom"]');
+            const prenom = document.querySelector('input[name="prenom"]');
+            const email = document.querySelector('input[name="email"]');
+            const tel = document.querySelector('input[name="tel"]');
+            const dateNaissance = document.querySelector('input[name="dateNaissance"]')
+            const nomUtilisateur = document.querySelector('input[name="user"]');
+            const password = document.querySelector('input[name="password"]');
+            const filiere = document.querySelector('select[name="filiere"]');
+            const fil = filiere.value;
+    
+            const educatrice = id;
+
+            // Conversion des données en JSON
+            const data = {
+                nomEtudiant: nom.value,
+                prenomEtudiant: prenom.value,
+                email: email.value,
+                telephone: tel.value,
+                role: "etudiant",
+                actived: true,
+                username: nomUtilisateur.value,
+                password: password.value,
+                // Ajouter la date d'aujourd'hui
+                dateInscription: Date.now(),
+                dateNaissance: dateNaissance.value,
+                educatrice_id: parseInt(educatrice),
+                filiere: parseInt(fil),
+            };
+
+            // Envoi des données du formulaire
+            $.ajax({
+                method: 'POST',
+                url: 'http://192.168.1.20:8089/etudiants',
+                data: JSON.stringify(data),
+                dataType: 'json',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                success: function(response) {
+                    // Redirection vers la page d'accueil
+                    window.location.href = "ed-gestion_inscription.html";
+                },
+                error: function(error) {
+                    console.log(error);
+                },
+            })
+        })
+    </script>
+
+</body>
+
+</html>
