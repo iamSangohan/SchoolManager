@@ -46,12 +46,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Détail Inscription</h1>
-                        
-                        <!-- Bouton au cas où -->
-                        <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                            <i class="fas fa-download fa-sm text-white-50"></i> Générer un rapport
-                        </a> -->
+                        <h1 class="h3 mb-0 text-gray-800">Détail sur l'étudiant</h1>
                     </div>
 
                     <!-- Content Row : Tableau des inscrits -->
@@ -82,20 +77,18 @@
                                 <div class="col-md-4">
                                     <div class="card">
                                         <div class="card-body">
-                                            <h2 class="h4 mb-0 text-gray-800">Taho Ben Arthur</h2>
+                                            <h2 class="h4 mb-0 text-gray-800" id="nomPrenoms">Taho Ben Arthur</h2>
                                             <p class="m-0">
-                                                <li class="font-weight-lighter list-group">Date d'inscription : 10/10/2023</li>
+                                                <li class="font-weight-lighter list-group" id="inscription">Date d'inscription : </li>
                                             </p>
                                             <ul class="list-group list-group-flush mb-4">
-                                                <li class="list-group-item pl-0 pr-0 pt-2 pb-2">Niveau d'étude : Master 2</li>
-                                                <li class="list-group-item pl-0 pr-0 pt-2 pb-2">Filière : SIGL</li>
-                                                <li class="list-group-item pl-0 pr-0 pt-2 pb-2">Matricule : 543</li>
-                                                <li class="list-group-item pl-0 pr-0 pt-2 pb-2">Availability: In Stock</li>
-                                                <li class="list-group-item pl-0 pr-0 pt-2 pb-2">Price in reward points: 400</li>
-                                                <li class="list-group-item pl-0 pr-0 pt-2 pb-2">Market Price: $1.134,82</li>
-                                                <li class="list-group-item pl-0 pr-0 pt-2 pb-2">List Price: $1.256,82</li>
-                                                <li class="list-group-item pl-0 pr-0 pt-2 pb-2">Cost Price: $1.487,82</li>
-                                                <li class="list-group-item pl-0 pr-0 pt-2 pb-2">Wholesale Price: $1.721,82</li>
+                                                <li class="list-group-item pl-0 pr-0 pt-2 pb-2" id="niveauEtude">Niveau d'étude : </li>
+                                                <li class="list-group-item pl-0 pr-0 pt-2 pb-2" id="filiere">Filière : </li>
+                                                <li class="list-group-item pl-0 pr-0 pt-2 pb-2" id="matricule">Matricule : </li>
+                                                <li class="list-group-item pl-0 pr-0 pt-2 pb-2" id="dateNaissance">Date de naissance : </li>
+                                                <li class="list-group-item pl-0 pr-0 pt-2 pb-2" id="email">Email : </li>
+                                                <li class="list-group-item pl-0 pr-0 pt-2 pb-2" id="telephone">Téléphone : </li>
+                                                <li class="list-group-item pl-0 pr-0 pt-2 pb-2" id="username">Nom d'utilisateur : </li>
                                             </ul>
                                         </div>
                                     </div>
@@ -106,39 +99,7 @@
 
                     <!-- Content Row : Validation de l'inscription -->
                     <div class="row">
-                            <!-- Area Chart : Courbe d'evolution -->
-                        <div class="w-75 m-auto">
-                            <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Validation de l'inscription</h6>
-                                </div>
-                                <!-- Card Body -->
-                                <div class="w-75 m-auto p-5">
-                                    <form class="user" id="connexionForm">
-                                        <div class="form-group">
-                                            <input name="nomUtilisateur" type="text" class="form-control form-control-user"
-                                                id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Entrez votre nom d'uitilisateur...">
-                                        </div>
-                                        <div class="form-group">
-                                            <input name="password" type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Mot de passe">
-                                        </div>
-                                        <!-- <div class="form-group">
-                                            <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                <label class="custom-control-label" for="customCheck">Se souvenir</label>
-                                            </div>
-                                        </div> -->
-                                        <div class="validateur row flex-row">
-                                            <input type="submit" class="w-25 m-auto btn btn-primary btn-user btn-block" value="Valider l'inscription"/>
-                                            <input type="submit" class="w-25 m-auto btn btn-danger btn-user btn-block" value="Décliner l'inscription"/>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
 
                 </div>
@@ -210,6 +171,101 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function(event) {
+            var user = window.localStorage.getItem('user');
+            if (!user) {
+                window.location.href = 'connexion.html';
+            } else {
+                user = JSON.parse(user);
+                var name = user.nom + ' ' + user.prenom;
+                var nom = document.getElementById('nomUtilisateur');
+                if (nom) {
+                    nom.textContent = name;
+                } else {
+                    console.log('Element with ID "nomUtilisateur" not found');
+                }
+            }
+
+            // Recuperer l'id de l'etudiant
+            const idEtudiant = window.location.search.split('=')[1];
+
+            $.ajax({
+                url: 'http://192.168.1.20:8089/etudiants/' + idEtudiant,
+                dataType: 'json',
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                success: function(data) {
+                    var etudiant = data;
+                    console.log(etudiant);
+                    var nom = document.getElementById('nomPrenoms');
+                    var dateNaissance = document.getElementById('dateNaissance');
+                    var email = document.getElementById('email');
+                    var telephone = document.getElementById('telephone');
+                    var niveauEtude = document.getElementById('niveauEtude');
+                    var filiere = document.getElementById('filiere');
+                    var matricule = document.getElementById('matricule');
+                    var nomUtilisateur = document.getElementById('username');
+                    var inscription = document.getElementById('inscription');
+
+                    if (nom) {
+                        nom.textContent = etudiant.nom + ' ' + etudiant.prenom;
+                    } else {
+                        console.log('Element with ID "nom" not found');
+                    }
+                    if (dateNaissance) {
+                        dateNaissance.textContent += etudiant.dateNaissance;
+                    } else {
+                        console.log('Element with ID "dateNaissance" not found');
+                    }
+                    if (email) {
+                        email.textContent += etudiant.email;
+                    } else {
+                        console.log('Element with ID "email" not found');
+                    }
+                    if (telephone) {
+                        telephone.textContent += etudiant.telephone;
+                    } else {
+                        console.log('Element with ID "telephone" not found');
+                    }
+                    if (niveauEtude) {
+                        niveauEtude.textContent += etudiant.filiere.niveau;
+                    } else {
+                        console.log('Element with ID "niveauEtude" not found');
+                    }
+                    if (filiere) {
+                        filiere.textContent += etudiant.filiere.nom;
+                    } else {
+                        console.log('Element with ID "filiere" not found');
+                    }
+                    if (matricule) {
+                        matricule.textContent += etudiant.matricule;
+                    } else {
+                        console.log('Element with ID "matricule" not found');
+                    }
+                    if (username) {
+                        username.textContent += etudiant.username;
+                    } else {
+                        console.log('Element with ID "nomUtilisateur" not found');
+                    }
+                    if (inscription) {
+                        inscription.textContent += etudiant.dateInscription;
+                    } else {
+                        console.log('Element with ID "inscription" not found');
+                    }
+
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
+        
+    </script>
 
 </body>
 
