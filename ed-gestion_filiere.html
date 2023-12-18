@@ -13,9 +13,7 @@
 
     <!-- Custom fonts for this template -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
@@ -161,6 +159,10 @@
                             <input name="niveau" type="text" class="form-control form-control-user"
                                 aria-describedby="" placeholder="Entrez le niveau">
                         </div>
+
+                        <select name="ecues" id="listeEcues" multiple>
+                            <option value="">Veuillez selectionner les ecues enseignées par l'enseigant</option>
+                        </select>
                         
                         <div class="w-50 m-auto d-flex justify-content-between">
                             <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
@@ -198,42 +200,102 @@
     <script>
         // Script ajax pour ajouter une filière
         const form = document.querySelector('#ajouterFiliere');
+        
+        $.ajax({
+            url: 'http://localhost:8089/filiere',
+            type: 'GET',
+            dataType: 'json',
+            headers : {
+                'Accept' : 'application/json',
+                'Content-Type' : 'application/json'
+            },
+            success: function (data) {
+                console.log(data);
+                listeFilieres = document.getElementById('listeFiliere');
+                if (listeFilieres){
+                    listeFilieres.innerHTML = '';
+                    data.forEach(element => {
+                        listeFilieres.innerHTML += `
+                        <div class="col-lg-4 mb-4">
+                            <div class="card bg-primary text-white shadow">
+                                <div class="card-body">
+                                    <a href="ed-detail_filiere.html?filiere=${element.filiere_id}" class="text-white">${element.nom}</a>
+                                    <div class="text-white-50 small">${element.niveau}</div>
+                                </div>
+                            </div>
+                        </div>
+                        `;
+                    });
+                }
+            },
+            error: function (errorThrown) {
+                console.log(errorThrown);
+            }
+        });
+
+        $.ajax({
+            url: 'http://localhost:8089/ecues',
+            type: 'GET',
+            dataType: 'json',
+            headers : {
+                'Accept' : 'application/json',
+                'Content-Type' : 'application/json'
+            },
+            success: function (data) {
+                liste = document.getElementById('listeEcues');
+                if (liste){
+                    data.forEach(element => {
+                        if (element.enseignant == null ) {
+                            liste.innerHTML += '<option value="'+element.id_ECUE+'">'+element.nom+'</option>';
+                        }
+                    });
+                }
+            },
+            error: function (errorThrown) {
+                console.log(errorThrown);
+            }
+        });
+
         form.addEventListener('submit', (event) => {
             event.preventDefault();
 
             const nomFiliere = document.querySelector('input[name="filiere"]');
             const niveauFiliere = document.querySelector('input[name="niveau"]');
 
-            if (nomFiliere.value) {
-                const data = {
-                    nom: nomFiliere.value,
-                    niveau: niveauFiliere.value,
-                };
-
-                console.log(data);
-
-                $.ajax({
-                    method: 'POST',
-                    url: 'http://192.168.1.23:8089/filiere',
-                    data: JSON.stringify(data),
-                    dataType: 'json',
-                    headers : {
-                        'Accept' : 'application/json',
-                        'Content-Type' : 'application/json'
-                    },
-                    success: function (data) {
-                        console.log(data);
-                        alert('Filière ajoutée avec succès');
-                        window.location.reload();
-                    },
-                    error: function (errorThrown) {
-                        console.log(errorThrown);
-                        alert('Erreur lors de l\'ajout de la filière');
-                    }
-                });
-            } else {
-                alert('Veuillez remplir tous les champs');
+            // Recuperer la liste de toutes les ecues selectionnées
+            const listeEcues = document.querySelector('#listeEcues');
+            const ecues = [];
+            for (let i = 0; i < listeEcues.length; i++) {
+                if (listeEcues[i].selected) {
+                    ecues.push(parseInt(listeEcues[i].value));
+                }
             }
+
+            const data = {
+                nom: nomFiliere.value,
+                niveau: niveauFiliere.value,
+                ecues: ecues
+            };
+
+            console.log(JSON.stringify(data));
+
+            $.ajax({
+                method: 'POST',
+                url: 'http://localhost:8089/filiere',
+                data: JSON.stringify(data),
+                dataType: 'json',
+                headers : {
+                    'Content-Type' : 'application/json',
+                    'Accept' : 'application/json',
+                },
+                success: function (data) {
+                    console.log(data);
+                    window.location.reload();
+                },
+                error: function (errorThrown) {
+                    console.log(errorThrown);
+                }
+            })
         });
     </script>
 
@@ -253,38 +315,6 @@
                 }
                 console.log(name);
             }
-
-            $.ajax({
-                url: 'http://192.168.1.23:8089/filiere',
-                type: 'GET',
-                dataType: 'json',
-                headers : {
-                    'Accept' : 'application/json',
-                    'Content-Type' : 'application/json'
-                },
-                success: function (data) {
-                    console.log(data);
-                    listeFilieres = document.getElementById('listeFiliere');
-                    if (listeFilieres){
-                        listeFilieres.innerHTML = '';
-                        data.forEach(element => {
-                            listeFilieres.innerHTML += `
-                            <div class="col-lg-4 mb-4">
-                                <div class="card bg-primary text-white shadow">
-                                    <div class="card-body">
-                                        <a href="ed-detail_filiere.html?filiere=${element.filiere_id}" class="text-white">${element.nom}</a>
-                                        <div class="text-white-50 small">${element.niveau}</div>
-                                    </div>
-                                </div>
-                            </div>
-                            `;
-                        });
-                    }
-                },
-                error: function (errorThrown) {
-                    console.log(errorThrown);
-                }
-            });
         });
 
         var logout = document.getElementById('logout');

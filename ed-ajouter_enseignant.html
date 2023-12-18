@@ -176,7 +176,7 @@
                             }
 
                             $.ajax({
-                                url: 'http://192.168.1.23:8089/ecues',
+                                url: 'http://localhost:8089/ecues',
                                 type: 'GET',
                                 dataType: 'json',
                                 headers : {
@@ -253,7 +253,7 @@
                             // Envoi des données du formulaire
                             $.ajax({
                                 method: 'POST',
-                                url: 'http://192.168.1.23:8089/enseignants',
+                                url: 'http://localhost:8089/enseignants',
                                 data: JSON.stringify(data),
                                 dataType: 'json',
                                 headers: {

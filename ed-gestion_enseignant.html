@@ -195,7 +195,7 @@
         // Au chargement de la page recuperer tous les enseignants et les afficher dans le tableau
         document.addEventListener('DOMContentLoaded', (event) => {
             $.ajax({
-                url: 'http://192.168.1.23:8089/enseignants',
+                url: 'http://localhost:8089/enseignants',
                 dataType: 'json',
                 type: 'GET',
                 headers: {

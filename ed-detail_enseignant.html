@@ -178,7 +178,7 @@
             const idEnseignant = window.location.search.split('=')[1];
 
             $.ajax({
-                url: 'http://192.168.1.23:8089/enseignants/' + idEnseignant,
+                url: 'http://localhost:8089/enseignants/' + idEnseignant,
                 dataType: 'json',
                 method: 'GET',
                 headers: {
@@ -233,7 +233,7 @@
             });
 
             $.ajax({
-                url: 'http://192.168.1.23:8089/ecues',
+                url: 'http://localhost:8089/ecues',
                 type: 'GET',
                 dataType: 'json',
                 headers : {
