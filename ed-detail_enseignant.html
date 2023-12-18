@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>School Manager - Détail Inscription</title>
+    <title>School Manager - Détail enseigant</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -53,16 +53,42 @@
                     <div class="row">
                         <div class="container">
                             <div class="row mb-5">
-                                <div class="col-md-8 m-auto">
+                                <div class="col-md-8">
+                                    <div class="row">
+                                        <!-- Image principale -->
+                                        <div class="col-md-12 mb-4">
+                                            <embed src="https://www.codeur.com/tuto/wp-content/uploads/2022/02/pdf-test.pdf" width="100%" height="500" type="application/pdf"/>
+                                        </div>
+
+                                        <div class="col-md-3 mb-4">
+                                            <img alt="" class="img-thumbnail p-0 border-0" src="https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80" />
+                                        </div>
+                                        <div class="col-md-3 mb-4">
+                                            <img alt="" class="img-thumbnail p-0 border-0" src="https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80" />
+                                        </div>
+                                        <div class="col-md-3 mb-4">
+                                            <img alt="" class="img-thumbnail p-0 border-0" src="https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80" />
+                                        </div>
+                                        <div class="col-md-3 mb-4">
+                                            <img alt="" class="img-thumbnail p-0 border-0" src="https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
                                     <div class="card">
                                         <div class="card-body">
-                                            <h2 class="h4 mb-0 text-gray-800" id="nomFiliere">Taho Ben Arthur</h2>
+                                            <h2 class="h4 mb-0 text-gray-800" id="nomPrenoms">Taho Ben Arthur</h2>
                                             <p class="m-0">
-                                                <li class="font-weight-lighter list-group" id="niveau">Date d'inscription : </li>
+                                                <li class="font-weight-lighter list-group" id="inscription">Date d'inscription : </li>
                                             </p>
-
-                                            <ul class="list-group list-group-flush mb-4" id="listeECUE">
+                                            <ul class="list-group list-group-flush mb-4">
                                                 <li class="list-group-item pl-0 pr-0 pt-2 pb-2" id="niveauEtude">Niveau d'étude : </li>
+                                                <li class="list-group-item pl-0 pr-0 pt-2 pb-2" id="filiere">Filière : </li>
+                                                <li class="list-group-item pl-0 pr-0 pt-2 pb-2" id="matricule">Matricule : </li>
+                                                <li class="list-group-item pl-0 pr-0 pt-2 pb-2" id="dateNaissance">Date de naissance : </li>
+                                                <li class="list-group-item pl-0 pr-0 pt-2 pb-2" id="email">Email : </li>
+                                                <li class="list-group-item pl-0 pr-0 pt-2 pb-2" id="telephone">Téléphone : </li>
+                                                <li class="list-group-item pl-0 pr-0 pt-2 pb-2" id="username">Nom d'utilisateur : </li>
                                             </ul>
                                         </div>
                                     </div>
@@ -147,7 +173,6 @@
     <script src="js/demo/chart-pie-demo.js"></script>
 
     <script>
-        
         document.addEventListener("DOMContentLoaded", function(event) {
             var user = window.localStorage.getItem('user');
             if (!user) {
@@ -161,15 +186,13 @@
                 } else {
                     console.log('Element with ID "nomUtilisateur" not found');
                 }
-                console.log(user);
             }
 
             // Recuperer l'id de l'etudiant
-            const idFiliere = window.location.search.split('=')[1];
-            console.log(idFiliere);
+            const idEtudiant = window.location.search.split('=')[1];
 
             $.ajax({
-                url: 'http://192.168.1.20:8089/filiere/' + idFiliere,
+                url: 'http://192.168.1.20:8089/etudiants/' + idEtudiant,
                 dataType: 'json',
                 method: 'GET',
                 headers: {
@@ -177,18 +200,64 @@
                     'Accept': 'application/json'
                 },
                 success: function(data) {
-                    const filiere = document.getElementById('nomFiliere');
-                    filiere.textContent = data.nom;
-                    const niveau = document.getElementById('niveau');
-                    niveau.textContent = data.niveau;
+                    var etudiant = data;
+                    console.log(etudiant);
+                    var nom = document.getElementById('nomPrenoms');
+                    var dateNaissance = document.getElementById('dateNaissance');
+                    var email = document.getElementById('email');
+                    var telephone = document.getElementById('telephone');
+                    var niveauEtude = document.getElementById('niveauEtude');
+                    var filiere = document.getElementById('filiere');
+                    var matricule = document.getElementById('matricule');
+                    var nomUtilisateur = document.getElementById('username');
+                    var inscription = document.getElementById('inscription');
 
-                    const liste = document.getElementById('listeECUE');
-                    liste.innerHTML = '';
-                    data.ecues.forEach(ecue => {
-                        liste.innerHTML += '<li class="list-group-item pl-0 pr-0 pt-2 pb-2">' + ecue.nom + '('+ ecue.description +')' + '</li>';
-                    });
+                    if (nom) {
+                        nom.textContent = etudiant.nom + ' ' + etudiant.prenom;
+                    } else {
+                        console.log('Element with ID "nom" not found');
+                    }
+                    if (dateNaissance) {
+                        dateNaissance.textContent += etudiant.dateNaissance;
+                    } else {
+                        console.log('Element with ID "dateNaissance" not found');
+                    }
+                    if (email) {
+                        email.textContent += etudiant.email;
+                    } else {
+                        console.log('Element with ID "email" not found');
+                    }
+                    if (telephone) {
+                        telephone.textContent += etudiant.telephone;
+                    } else {
+                        console.log('Element with ID "telephone" not found');
+                    }
+                    if (niveauEtude) {
+                        niveauEtude.textContent += etudiant.filiere.niveau;
+                    } else {
+                        console.log('Element with ID "niveauEtude" not found');
+                    }
+                    if (filiere) {
+                        filiere.textContent += etudiant.filiere.nom;
+                    } else {
+                        console.log('Element with ID "filiere" not found');
+                    }
+                    if (matricule) {
+                        matricule.textContent += etudiant.matricule;
+                    } else {
+                        console.log('Element with ID "matricule" not found');
+                    }
+                    if (username) {
+                        username.textContent += etudiant.username;
+                    } else {
+                        console.log('Element with ID "nomUtilisateur" not found');
+                    }
+                    if (inscription) {
+                        inscription.textContent += etudiant.dateInscription;
+                    } else {
+                        console.log('Element with ID "inscription" not found');
+                    }
 
-                    
                 },
                 error: function(error) {
                     console.log(error);
