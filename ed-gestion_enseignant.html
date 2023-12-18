@@ -50,7 +50,7 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-2 text-gray-800">Gestion des enseignants</h1>
-                        <a href="ed-ajouter_etudiant.html" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                        <a href="ed-ajouter_enseignant.html" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                             <i class="fas fa-plus fa-sm text-white-50"></i> Ajouter un enseignant
                         </a>
                     </div>
@@ -127,12 +127,12 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Prêt à partir ?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-body">Sélectionnez "Déconnexion" ci-dessous si vous êtes prêt à mettre fin à votre session actuelle.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                     <a class="btn btn-primary" id="logout">Deconnexion</a>
@@ -192,10 +192,10 @@
             console.log('Element with ID "logout" not found');
         }
 
-        // Au chargement de la page recuperer tous les etudiants et les afficher dans le tableau
+        // Au chargement de la page recuperer tous les enseignants et les afficher dans le tableau
         document.addEventListener('DOMContentLoaded', (event) => {
             $.ajax({
-                url: 'http://192.168.1.20:8089/etudiants',
+                url: 'http://192.168.1.23:8089/enseignants',
                 dataType: 'json',
                 type: 'GET',
                 headers: {
@@ -216,7 +216,7 @@
                                     <td>${element.dateNaissance}</td>
                                     <td>${element.email}</td>
                                     <td class="">
-                                        <a href="ed-detail_inscription.html?idEtudiant=${element.idEtudiant}">
+                                        <a href="ed-detail_enseignant.html?idEnseignant=${element.idEnseignant}">
                                             <i class="fas fa fa-eye"></i>
                                         </a>
                                     </td>

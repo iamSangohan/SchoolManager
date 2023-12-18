@@ -126,12 +126,12 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Prêt à partir ?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-body">Sélectionnez "Déconnexion" ci-dessous si vous êtes prêt à mettre fin à votre session actuelle.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                     <a class="btn btn-primary" id="logout">Deconnexion</a>
@@ -154,14 +154,12 @@
                     <form class="user" id="ajouterFiliere">
                         <div class="form-group">
                             <input name="filiere" type="text" class="form-control form-control-user"
-                                id="exampleInputEmail" aria-describedby="emailHelp"
-                                placeholder="Entrez le nom de la filière">
+                                aria-describedby="" placeholder="Entrez le nom de la filière">
                         </div>
                         
                         <div class="form-group">
                             <input name="niveau" type="text" class="form-control form-control-user"
-                                id="exampleInputEmail" aria-describedby="emailHelp"
-                                placeholder="Entrez le niveau">
+                                aria-describedby="" placeholder="Entrez le niveau">
                         </div>
                         
                         <div class="w-50 m-auto d-flex justify-content-between">
@@ -212,15 +210,17 @@
                     niveau: niveauFiliere.value,
                 };
 
+                console.log(data);
+
                 $.ajax({
-                    url: 'http://192.168.1.20:8089/filiere',
-                    type: 'POST',
+                    method: 'POST',
+                    url: 'http://192.168.1.23:8089/filiere',
+                    data: JSON.stringify(data),
                     dataType: 'json',
                     headers : {
                         'Accept' : 'application/json',
                         'Content-Type' : 'application/json'
                     },
-                    data: JSON.stringify(data),
                     success: function (data) {
                         console.log(data);
                         alert('Filière ajoutée avec succès');
@@ -255,7 +255,7 @@
             }
 
             $.ajax({
-                url: 'http://192.168.1.20:8089/filiere',
+                url: 'http://192.168.1.23:8089/filiere',
                 type: 'GET',
                 dataType: 'json',
                 headers : {

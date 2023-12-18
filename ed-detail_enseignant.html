@@ -46,49 +46,25 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Détail sur l'étudiant</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Détail sur l'enseignant</h1>
                     </div>
 
                     <!-- Content Row : Tableau des inscrits -->
                     <div class="row">
                         <div class="container">
                             <div class="row mb-5">
-                                <div class="col-md-8">
-                                    <div class="row">
-                                        <!-- Image principale -->
-                                        <div class="col-md-12 mb-4">
-                                            <embed src="https://www.codeur.com/tuto/wp-content/uploads/2022/02/pdf-test.pdf" width="100%" height="500" type="application/pdf"/>
-                                        </div>
-
-                                        <div class="col-md-3 mb-4">
-                                            <img alt="" class="img-thumbnail p-0 border-0" src="https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80" />
-                                        </div>
-                                        <div class="col-md-3 mb-4">
-                                            <img alt="" class="img-thumbnail p-0 border-0" src="https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80" />
-                                        </div>
-                                        <div class="col-md-3 mb-4">
-                                            <img alt="" class="img-thumbnail p-0 border-0" src="https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80" />
-                                        </div>
-                                        <div class="col-md-3 mb-4">
-                                            <img alt="" class="img-thumbnail p-0 border-0" src="https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
+                                <div class="col-md-6 m-auto">
                                     <div class="card">
                                         <div class="card-body">
-                                            <h2 class="h4 mb-0 text-gray-800" id="nomPrenoms">Taho Ben Arthur</h2>
+                                            <h2 class="h4 mb-0 text-gray-800" id="nomPrenoms">test test</h2>
                                             <p class="m-0">
                                                 <li class="font-weight-lighter list-group" id="inscription">Date d'inscription : </li>
                                             </p>
                                             <ul class="list-group list-group-flush mb-4">
-                                                <li class="list-group-item pl-0 pr-0 pt-2 pb-2" id="niveauEtude">Niveau d'étude : </li>
-                                                <li class="list-group-item pl-0 pr-0 pt-2 pb-2" id="filiere">Filière : </li>
-                                                <li class="list-group-item pl-0 pr-0 pt-2 pb-2" id="matricule">Matricule : </li>
                                                 <li class="list-group-item pl-0 pr-0 pt-2 pb-2" id="dateNaissance">Date de naissance : </li>
                                                 <li class="list-group-item pl-0 pr-0 pt-2 pb-2" id="email">Email : </li>
                                                 <li class="list-group-item pl-0 pr-0 pt-2 pb-2" id="telephone">Téléphone : </li>
-                                                <li class="list-group-item pl-0 pr-0 pt-2 pb-2" id="username">Nom d'utilisateur : </li>
+                                                <li class="list-group-item pl-0 pr-0 pt-2 pb-2" id="user">Nom d'utilisateur : </li>
                                             </ul>
                                         </div>
                                     </div>
@@ -98,8 +74,18 @@
                     </div>
 
                     <!-- Content Row : Validation de l'inscription -->
-                    <div class="row">
-
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h5 mb-2 text-gray-800">Liste des enseignements</h1>
+                    </div>
+                    <div class="row" id="listeEcue">
+                        <div class="col-lg-4 mb-4">
+                            <div class="card bg-primary text-white shadow">
+                                <div class="card-body">
+                                    <a href="" class="text-white">Filière</a>
+                                    <div class="text-white-50 small">#4e73df</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
@@ -135,15 +121,15 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Prêt à partir ?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-body">Sélectionnez "Déconnexion" ci-dessous si vous êtes prêt à mettre fin à votre session actuelle.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <a class="btn btn-primary" id="logout">Deconnexion</a>
                 </div>
             </div>
         </div>
@@ -188,11 +174,11 @@
                 }
             }
 
-            // Recuperer l'id de l'etudiant
-            const idEtudiant = window.location.search.split('=')[1];
+            // Recuperer l'id de l'enseignant
+            const idEnseignant = window.location.search.split('=')[1];
 
             $.ajax({
-                url: 'http://192.168.1.20:8089/etudiants/' + idEtudiant,
+                url: 'http://192.168.1.23:8089/enseignants/' + idEnseignant,
                 dataType: 'json',
                 method: 'GET',
                 headers: {
@@ -200,60 +186,42 @@
                     'Accept': 'application/json'
                 },
                 success: function(data) {
-                    var etudiant = data;
-                    console.log(etudiant);
+                    var enseignant = data;
+                    console.log(enseignant);
                     var nom = document.getElementById('nomPrenoms');
                     var dateNaissance = document.getElementById('dateNaissance');
                     var email = document.getElementById('email');
                     var telephone = document.getElementById('telephone');
-                    var niveauEtude = document.getElementById('niveauEtude');
-                    var filiere = document.getElementById('filiere');
-                    var matricule = document.getElementById('matricule');
-                    var nomUtilisateur = document.getElementById('username');
                     var inscription = document.getElementById('inscription');
+                    var user = document.getElementById('user');
 
                     if (nom) {
-                        nom.textContent = etudiant.nom + ' ' + etudiant.prenom;
+                        nom.textContent = enseignant.nom + ' ' + enseignant.prenom;
                     } else {
                         console.log('Element with ID "nom" not found');
                     }
                     if (dateNaissance) {
-                        dateNaissance.textContent += etudiant.dateNaissance;
+                        dateNaissance.textContent += enseignant.dateNaissance;
                     } else {
                         console.log('Element with ID "dateNaissance" not found');
                     }
                     if (email) {
-                        email.textContent += etudiant.email;
+                        email.textContent += enseignant.email;
                     } else {
                         console.log('Element with ID "email" not found');
                     }
                     if (telephone) {
-                        telephone.textContent += etudiant.telephone;
+                        telephone.textContent += enseignant.telephone;
                     } else {
                         console.log('Element with ID "telephone" not found');
                     }
-                    if (niveauEtude) {
-                        niveauEtude.textContent += etudiant.filiere.niveau;
-                    } else {
-                        console.log('Element with ID "niveauEtude" not found');
-                    }
-                    if (filiere) {
-                        filiere.textContent += etudiant.filiere.nom;
-                    } else {
-                        console.log('Element with ID "filiere" not found');
-                    }
-                    if (matricule) {
-                        matricule.textContent += etudiant.matricule;
-                    } else {
-                        console.log('Element with ID "matricule" not found');
-                    }
-                    if (username) {
-                        username.textContent += etudiant.username;
+                    if (user) {
+                        user.textContent += enseignant.username;
                     } else {
                         console.log('Element with ID "nomUtilisateur" not found');
                     }
                     if (inscription) {
-                        inscription.textContent += etudiant.dateInscription;
+                        inscription.textContent += enseignant.dateInscription;
                     } else {
                         console.log('Element with ID "inscription" not found');
                     }
@@ -263,10 +231,45 @@
                     console.log(error);
                 }
             });
+
+            $.ajax({
+                url: 'http://192.168.1.23:8089/ecues',
+                type: 'GET',
+                dataType: 'json',
+                headers : {
+                    'Accept' : 'application/json',
+                    'Content-Type' : 'application/json'
+                },
+                success: function (data) {
+                    console.log(data);
+                    liste = document.getElementById('listeEcue');
+                    if (liste){
+                        liste.innerHTML = '';
+                        data.forEach(element => {
+                            if (element.enseignant != null) {
+                                liste.innerHTML += `
+                                    <div class="col-lg-4 mb-4">
+                                        <div class="card bg-primary text-white shadow">
+                                            <div class="card-body">
+                                                <a href="" class="text-white">${element.nom}</a>
+                                                <div class="text-white-50 small">${element.description}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    `;
+                            }
+                        });
+                    }
+                },
+                error: function (errorThrown) {
+                    console.log(errorThrown);
+                }
+            });
         });
         
     </script>
 
 </body>
+
 
 </html>
